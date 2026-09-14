@@ -282,6 +282,12 @@ class TestUtils(TestCase):
         self.assertEqual(lookup_device_info("AMD Instinct MI300X"), upper)
         self.assertEqual(lookup_device_info("amd instinct mi300x"), upper)
 
+    def test_lookup_device_info_gb300(self):
+        device_info = lookup_device_info("NVIDIA GB300")
+        self.assertIsNotNone(device_info)
+        self.assertEqual(device_info.tops[torch.bfloat16], 2500.0)
+        self.assertEqual(device_info.dram_bw_gbs, 8000.0)
+
 
 def has_supported_gpu():
     """Check if any GPU platform with Triton support is available."""
